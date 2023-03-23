@@ -10,5 +10,5 @@ test("Displays image for each scoop option from server", () => {
     expect(scoopImages).toHaveLength(2)
     // Confirm alt text of images
     const altText = scoopImages.map((element) => element.alt)
-    expect(altText).toEqual(['Chocolate scoop', 'Vanilla scoop'])
+    expect(altText).toEqual(['Chocolate scoop', 'Vanilla scoop']) // Arrays, Objects -> use .toEqual() matcher. Numbers, Strings -> .toBe() 
 })
