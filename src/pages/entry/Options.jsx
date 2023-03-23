@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react"
 import Axios from "axios"
 import ScoopOption from "./ScoopOption"
+import ToppingOption from "./ToppingOption"
 import { Row } from "react-bootstrap"
 
 export default function Options({ optionType }) {
-    const [items, setITems] = useState([])
+    const [items, setItems] = useState([])
 
     // optionType is 'scoops' or 'toppings'
     useEffect(() => {
         Axios.get(`http://localhost:3030/${optionType}`)
-            .then(response => setITems(response.data))
+            .then(response => setItems(response.data))
             .catch(err => {
                 console.log(err)
             })
     }, [optionType])
 
-    // TODO: replace 'null' with ToppingOption when available
-    const ItemComponent = optionType === 'scoops' ? ScoopOption : null;
+    const ItemComponent = optionType === 'scoops' ? ScoopOption : ToppingOption;
 
     const optionItems = items.map(item => (
         <ItemComponent
