@@ -4,8 +4,9 @@ An app built for learning how to test code with **Jest** and practice Test-Drive
 ## Concepts used
 ### React Testing Library:
 1. ```userEvent``` library that simulates user interactions by dispatching the events that would happen if the interaction took place in a browser.
-    1. All methods from the userEvent library return **Promises** and must be **awaited**
-    2. ```user.hover(<element>)```, ```user.unhover(<element>)``` (remember to add await infront)
+    1. A user instance is first created with ```userEvent.setup()```
+    2. All methods from the userEvent library return **Promises** and must be **awaited**
+    3. ```user.hover(<element>)```, ```user.unhover(<element>)``` (remember to add await infront)
 2.. For elements not starting out on the page, the screen object method for query elements start with **'query'** and not **'get'**
     1. ```queryByText```
     2. ```expect(<element>).not.toBeInTheDocument()```
