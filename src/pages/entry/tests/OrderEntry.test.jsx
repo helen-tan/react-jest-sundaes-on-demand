@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import OrderEntry from "../OrderEntry";
 import { rest } from "msw";
 import { server } from "../../../mocks/server";
@@ -18,7 +18,11 @@ test("Handles error for scoops and toppings routes", async () => {
 
     render(<OrderEntry />)
     // Alerts will appear asynchronously as they will only appear after axios .catch() is hit
-    const alerts = await screen.findAllByRole('alert', { name: 'An unexpected error occured. Please try again later!' })
+    // use waitFor to prevent Race Condition err between the 2 requests above
+    await waitFor(async() => {
+        const alerts = await screen.findAllByRole('alert')
+        expect(alerts).toHaveLength(2)
+    })
     
-    expect(alerts).toHaveLength(2)
+    
 })
