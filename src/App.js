@@ -7,9 +7,10 @@ function App() {
     <Container>
       <OrderDetailsProvider>
         {/* Summary page & Entry page need provider */}
-        <OrderEntry/>
+        <OrderEntry />
       </OrderDetailsProvider>
       {/* Confirmation page does not need Provider */}
+
 
     </Container>
   );

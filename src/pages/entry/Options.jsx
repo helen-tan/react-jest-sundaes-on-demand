@@ -6,10 +6,12 @@ import { Row } from "react-bootstrap"
 import AlertBanner from "../common/AlertBanner"
 import { pricePerItem } from "../../constants"
 import { formatCurrency } from "../../utilities"
+import { useOrderDetailsContext } from "../../contexts/OrderDetailsContext"
 
 export default function Options({ optionType }) {
     const [items, setItems] = useState([])
     const [error, setError] = useState(false)
+    const { totals } = useOrderDetailsContext()
 
     // optionType is 'scoops' or 'toppings'
     useEffect(() => {
@@ -40,6 +42,7 @@ export default function Options({ optionType }) {
         <>
             <h2>{title}</h2>
             <p>{formatCurrency(pricePerItem[optionType])} each</p>
+            <p>{title} total: {formatCurrency(totals[optionType])}</p>
             <Row>{optionItems}</Row>
         </>
     )
