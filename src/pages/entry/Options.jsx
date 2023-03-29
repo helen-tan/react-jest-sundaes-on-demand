@@ -22,7 +22,9 @@ export default function Options({ optionType }) {
             .then(response => setItems(response.data))
             .catch(err => {
                 console.log(err)
-                if (error.name !== "CanceledError") setError(true)
+                if (err.name !== "CanceledError") {
+                    setError(true)
+                }
             })
 
         // Cleanup: Abort axios call on component unmount    
