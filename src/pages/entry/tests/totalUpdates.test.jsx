@@ -68,6 +68,7 @@ describe("Grand total tests", () => {
         const grandTotal = screen.getByRole("heading", { name: /grand total: \$/i })
         expect(grandTotal).toHaveTextContent("0.00")
 
+        // explicit unmount
         unmount()
     })
 
