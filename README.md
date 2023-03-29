@@ -1,5 +1,5 @@
 # Sundaes on Demand
-An app built for learning how to test code with **Jest** and practice Test-Driven Development (TDD) with React.  
+An app built for learning how to test code with **Jest** and practice Test-Driven Development (TDD) with React. Done as part of the Udemy course - Testing React with Jest and React Testing Library (RTL)
 
 ## Concepts used
 ### React Testing Library:
@@ -32,3 +32,4 @@ An app built for learning how to test code with **Jest** and practice Test-Drive
 
 ### Mock Service Worker
 1. Overriding Mock Service Worker's response handlers for individual tests with ```sever.resetHandlers()```.  This function accepts an optional list of request handlers to override the initial handlers to re-declare the mock definition completely on runtime.
+2. MSW doesn't run when we are running the actual app, and we will need a backend server for handle the axois requests. The repo for the server can found in the [course instructor's repo](https://github.com/bonnie/udemy-TESTING-LIBRARY/tree/main/sundae-server)
