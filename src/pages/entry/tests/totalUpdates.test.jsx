@@ -63,10 +63,12 @@ test("Updates toppings subtotal when toppings change", async () => {
 
 describe("Grand total tests", () => {
     test("Grand total starts at $0.00", () => {
-        render(<OrderEntry />)
+        const { unmount } = render(<OrderEntry />)
 
         const grandTotal = screen.getByRole("heading", { name: /grand total: \$/i })
         expect(grandTotal).toHaveTextContent("0.00")
+
+        unmount()
     })
 
     test("Grand total updates properly if scoop is added first", async () => { // async bcos 1. we are awaiting data from axios and 2. we are using userEvent
