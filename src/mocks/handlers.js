@@ -1,5 +1,9 @@
 import { rest } from "msw";
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 export const handlers = [
     // Handles (intercepts) GET /scoops request
     rest.get("http://localhost:3030/scoops", (req, res, ctx) => {
@@ -21,7 +25,8 @@ export const handlers = [
             ])
         )
     }),
-    rest.post("http://localhost:3030/order", (req, res, ctx) => {
+    rest.post("http://localhost:3030/order", async (req, res, ctx) => {
+        await sleep(100)
         // create a random order number
         const orderNumber = Math.floor(Math.random() * 10000000000)
         

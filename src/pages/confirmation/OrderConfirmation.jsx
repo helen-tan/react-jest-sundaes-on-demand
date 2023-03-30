@@ -27,7 +27,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
     }
 
     if (!orderNumber) {
-        return <div>Loading...</div>
+        return <div>Loading</div>
     } else {
         return (
             <div style={{ textAlign: "center" }}>

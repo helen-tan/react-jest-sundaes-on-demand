@@ -49,15 +49,16 @@ test("Order phases for happy path", async () => {
 
     // CONFIRMATION PAGE:
     // Expect "loading" to show
-    const loading = screen.getByText(/loading/)
+    const loading = screen.getByText(/loading/i)
     expect(loading).toBeInTheDocument()
 
     // check confirmation page text (async bcos there is a POST req to server in between summary & confirmation pages)
+    // Must confirm that 'thank you' header has appeared b4 asserting that loading has disappeared
     const thankYouHeader = await screen.findByRole("heading", { name: /thank you/i })
     expect(thankYouHeader).toBeInTheDocument()
 
     // expect that loading has disappeared. queryByxxx as element not expected to be in DOM)
-    const notLoading = screen.queryByText("loading")
+    const notLoading = screen.queryByText(/loading/i)
     expect(notLoading).not.toBeInTheDocument()
 
     // find and click "new order" on confirmation page
