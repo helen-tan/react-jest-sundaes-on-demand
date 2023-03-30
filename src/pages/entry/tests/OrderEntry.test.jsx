@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "../../../test-utils/testing-library-uti
 import OrderEntry from "../OrderEntry";
 import { rest } from "msw";
 import { server } from "../../../mocks/server";
+import userEvent from "@testing-library/user-event";
 
 test("Handles error for scoops and toppings routes", async () => {
     // Override handlers/ reset handlers that have the specified endpoints
@@ -23,6 +24,25 @@ test("Handles error for scoops and toppings routes", async () => {
         const alerts = await screen.findAllByRole('alert')
         expect(alerts).toHaveLength(2)
     })
-    
-    
+})
+
+test("Order button disabled when there are no scoops ordered", async () => {
+    const user = userEvent.setup()
+    render(<OrderEntry />)
+
+    // Order button should be disabled at first
+    const orderButton = screen.getByRole("button", { name: /order sundae/i })
+    expect(orderButton).toBeDisabled()
+
+    // Add a scoop. Order button should be enabled
+    const vanillaInput = await screen.findByRole("spinbutton", { name: "Vanilla" })
+    await user.clear(vanillaInput)
+    await user.type(vanillaInput, "1")
+
+    expect(orderButton).toBeEnabled()
+
+    // Remove a scoop. Order button should be disabled
+    await user.clear(vanillaInput)
+    await user.type(vanillaInput, "0")
+    expect(orderButton).toBeDisabled()
 })
