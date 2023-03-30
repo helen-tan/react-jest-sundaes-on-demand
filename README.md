@@ -26,9 +26,10 @@ An app built for learning how to test code with **Jest** and practice Test-Drive
 ### Jest:
 1. Running tests only on a single file
     1. Isolate testing file by typing 'p' in Jest watch mode, which allows us to type a regex pattern that can match the name of the file to test and filter out that file for testing
-3. Run only a single test within a file 
+2. Run only a single test within a file 
     1. ```test.only()``` to run only that one test
     2. ```test.skip()``` to run all tests except that one test
+3. Jest-DOM's ```.toHaveClass()``` matcher for assertions. Checks whether all of the matched elements have the expected class name. E.g. ```expect(<element/>).toHaveClass("a-class-name")```
 
 ### Mock Service Worker
 1. Overriding Mock Service Worker's response handlers for individual tests with ```sever.resetHandlers()```.  This function accepts an optional list of request handlers to override the initial handlers to re-declare the mock definition completely on runtime.
