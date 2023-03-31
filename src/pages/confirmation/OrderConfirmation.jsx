@@ -2,11 +2,13 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Button } from 'react-bootstrap'
+import AlertBanner from '../common/AlertBanner'
 import { useOrderDetailsContext } from '../../contexts/OrderDetailsContext'
 
 export default function OrderConfirmation({ setOrderPhase }) {
     const { resetOrder } = useOrderDetailsContext()
     const [orderNumber, setOrderNumber] = useState(null)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         Axios.post("http://localhost:3030/order")
@@ -15,6 +17,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
         })
         .catch(err => {
             console.log(err)
+            setError(true)
         })
 
     }, [])
@@ -24,6 +27,19 @@ export default function OrderConfirmation({ setOrderPhase }) {
         resetOrder()
         // set new order phase, which will send us back to the order page once changed
         setOrderPhase("inProgress")
+    }
+    
+    const newOrderButton = (
+        <Button onClick={handleClick}>Create new order</Button>
+    )
+
+    if (error) {
+        return (
+            <>
+                <AlertBanner message={null} variant={null} />
+                {newOrderButton}
+            </>
+        )
     }
 
     if (!orderNumber) {
@@ -36,7 +52,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
                 <p style={{ fontSize: "256" }}>
                     as per our terms and conditions, nothing will happen now
                 </p>
-                <Button onClick={handleClick}>Create new order</Button>
+                {newOrderButton}
             </div>
         )
     }
