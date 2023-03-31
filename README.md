@@ -30,6 +30,9 @@ An app built for learning how to test code with **Jest** and practice Test-Drive
     1. ```test.only()``` to run only that one test
     2. ```test.skip()``` to run all tests except that one test
 3. Jest-DOM's ```.toHaveClass()``` matcher for assertions. Checks whether all of the matched elements have the expected class name. E.g. ```expect(<element/>).toHaveClass("a-class-name")```
+4. Passing a Jest Mock Function ```jest.fn()``` as prop when rendering components in test to prevent errors
+    * Used when the component rendered in the test has functions passed as props and these functions are called in the test. If the function passed by the prop get called in the test. We have to pass a Jest Mock Function as a prop.
+    * Does not do anything. Functions as a placeholder to avoid errors
 
 ### Mock Service Worker
 1. Overriding Mock Service Worker's response handlers for individual tests with ```sever.resetHandlers()```.  This function accepts an optional list of request handlers to override the initial handlers to re-declare the mock definition completely on runtime.
